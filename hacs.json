@@ -1,6 +1,9 @@
 {
   "name": "Prague Parking",
   "homeassistant": "2025.11.1",
-  "country": ["CZ"]
+  "country": ["CZ"],
+  "documentation": "https://github.com/krazy350/ha_prague_parking",
+  "issues": "https://github.com/krazy350/ha_prague_parking/issues",
+  "render_readme": true
 }
 
