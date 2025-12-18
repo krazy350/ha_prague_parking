@@ -107,7 +107,8 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors
         )
 
-    async def async_get_options_flow(self, config_entry):
+    @staticmethod
+    async def async_get_options_flow(config_entry):
         return OptionsFlowHandler(config_entry)
 
 
