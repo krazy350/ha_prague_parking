@@ -120,3 +120,12 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     return unload_ok
 
+
+async def async_reload_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
+    """Reload a config entry.
+
+    This allows reloading the integration from the Integrations UI without
+    restarting Home Assistant. Call through the Integrations page → ⋮ → Reload.
+    """
+    await hass.config_entries.async_reload(entry.entry_id)
+

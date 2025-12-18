@@ -128,20 +128,23 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
     """Handle options for Prague Parking."""
 
     def __init__(self, config_entry):
-        self.config_entry = config_entry
+        # Store the config entry on a private attribute to avoid assigning
+        # to the read-only `config_entry` property on the base class.
+        self._config_entry = config_entry
 
     async def async_step_init(self, user_input: dict[str, Any] | None = None):
         """Manage the options."""
         if user_input is not None:
             return self.async_create_entry(title="", data=user_input)
 
-        current = self.config_entry.options
+        current = self._config_entry.options
+        # Default to the value from options, falling back to the original
+        # config entry data if the option wasn't set during setup.
+        default_show = current.get(
+            "show_api_duration", self._config_entry.data.get("show_api_duration", False)
+        )
         data_schema = vol.Schema(
-            {
-                vol.Optional(
-                    "show_api_duration", default=current.get("show_api_duration", False)
-                ): bool,
-            }
+            {vol.Optional("show_api_duration", default=default_show): bool}
         )
 
         return self.async_show_form(step_id="init", data_schema=data_schema)

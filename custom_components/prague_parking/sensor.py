@@ -66,30 +66,6 @@ async def async_setup_platform(
     async_add_entities(sensors, True)
 
 
-class PragueParkingApiDurationSensor(PragueParkingBaseSensor):
-    """Sensor for API request duration in milliseconds."""
-
-    def __init__(self, coordinator: PragueParkingCoordinator, entry_id: str | None = None) -> None:
-        """Initialize the sensor."""
-        super().__init__(coordinator, entry_id)
-
-        parking_name = coordinator.parking_name or coordinator.parking_id
-
-        self._attr_name = f"{parking_name} API Request Duration"
-        unique_id_suffix = f"_{entry_id}" if entry_id else f"_{coordinator.parking_id}"
-        self._attr_unique_id = f"{DOMAIN}_api_request_duration_ms{unique_id_suffix}"
-        self._attr_icon = "mdi:clock-outline"
-        self._attr_native_unit_of_measurement = "ms"
-        self._attr_state_class = SensorStateClass.MEASUREMENT
-
-    @property
-    def native_value(self) -> int | None:
-        """Return the API request duration in ms."""
-        if not self.coordinator.data:
-            return None
-        return self.coordinator.data.get("api_request_duration_ms")
-
-
 class PragueParkingBaseSensor(CoordinatorEntity, SensorEntity):
     """Base class for Prague Parking sensors."""
 
@@ -186,4 +162,28 @@ class PragueParkingOccupancySensor(PragueParkingBaseSensor):
         if not self.coordinator.data:
             return None
         return self.coordinator.data.get("occupancy_percentage")
+
+
+class PragueParkingApiDurationSensor(PragueParkingBaseSensor):
+    """Sensor for API request duration in milliseconds."""
+
+    def __init__(self, coordinator: PragueParkingCoordinator, entry_id: str | None = None) -> None:
+        """Initialize the sensor."""
+        super().__init__(coordinator, entry_id)
+
+        parking_name = coordinator.parking_name or coordinator.parking_id
+
+        self._attr_name = f"{parking_name} API Request Duration"
+        unique_id_suffix = f"_{entry_id}" if entry_id else f"_{coordinator.parking_id}"
+        self._attr_unique_id = f"{DOMAIN}_api_request_duration_ms{unique_id_suffix}"
+        self._attr_icon = "mdi:clock-outline"
+        self._attr_native_unit_of_measurement = "ms"
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+
+    @property
+    def native_value(self) -> int | None:
+        """Return the API request duration in ms."""
+        if not self.coordinator.data:
+            return None
+        return self.coordinator.data.get("api_request_duration_ms")
 

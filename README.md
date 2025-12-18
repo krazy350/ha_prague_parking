@@ -91,7 +91,7 @@ prague_parking:
 
 ```yaml
 prague_parking:
-  api_key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDAyMCwiaWF0IjoxNzYwNDI1MzMwLCJleHAiOjExNzYwNDI1MzMwLCJpc3MiOiJnb2xlbWlvIiwianRpIjoiODRhN2E1ZGYtMTcxMC00OTYyLWE1M2YtMTAxOTYyNWM1M2YzIn0.XW6gwaDkf2yFYZjQjYRvaN8MkM_dPgfaWvBTizKAlhk
+  api_key: XXYYZZ
   parking_id: tsk-offstreet-6b737fe9-6f24-450c-9868-819cb9377ad8
   show_api_duration: true
 ```
@@ -100,7 +100,7 @@ prague_parking:
 
 ```yaml
 prague_parking:
-  api_key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDAyMCwiaWF0IjoxNzYwNDI1MzMwLCJleHAiOjExNzYwNDI1MzMwLCJpc3MiOiJnb2xlbWlvIiwianRpIjoiODRhN2E1ZGYtMTcxMC00OTYyLWE1M2YtMTAxOTYyNWM1M2YzIn0.XW6gwaDkf2yFYZjQjYRvaN8MkM_dPgfaWvBTizKAlhk
+  api_key: XXYYZZ
   scan_interval: 60
   show_api_duration: true
   parkings:
@@ -154,7 +154,7 @@ Each sensor includes the following attributes:
 You can find parking IDs by querying the Golemio API:
 ```bash
 curl -X 'GET' \
-  'https://api.golemio.cz/v3/parkings' \
+  'https://api.golemio.cz/v3/parking?primarySource=tsk-offstreet&activeOnly=true' \
   -H 'accept: application/json' \
   -H 'X-Access-Token: YOUR_API_KEY'
 ```
