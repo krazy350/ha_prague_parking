@@ -163,3 +163,6 @@ curl -X 'GET' \
 
 For issues and feature requests, please visit the [GitHub repository](https://github.com/krazy350/ha_prague_parking).
 
+
+<!-- PR branch test: small doc change to create update2-pr branch -->
+
