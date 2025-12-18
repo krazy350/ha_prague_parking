@@ -23,6 +23,7 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
         vol.Optional("scan_interval", default=DEFAULT_SCAN_INTERVAL): vol.All(
             vol.Coerce(int), vol.Range(min=30, max=3600)
         ),
+        vol.Optional("show_api_duration", default=False): bool,
     }
 )
 
@@ -106,6 +107,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors
         )
 
+    async def async_get_options_flow(self, config_entry):
+        return OptionsFlowHandler(config_entry)
+
 
 class CannotConnect(HomeAssistantError):
     """Error to indicate we cannot connect."""
@@ -117,4 +121,27 @@ class InvalidAuth(HomeAssistantError):
 
 class InvalidParkingId(HomeAssistantError):
     """Error to indicate the parking ID is invalid."""
+
+
+class OptionsFlowHandler(config_entries.OptionsFlow):
+    """Handle options for Prague Parking."""
+
+    def __init__(self, config_entry):
+        self.config_entry = config_entry
+
+    async def async_step_init(self, user_input: dict[str, Any] | None = None):
+        """Manage the options."""
+        if user_input is not None:
+            return self.async_create_entry(title="", data=user_input)
+
+        current = self.config_entry.options
+        data_schema = vol.Schema(
+            {
+                vol.Optional(
+                    "show_api_duration", default=current.get("show_api_duration", False)
+                ): bool,
+            }
+        )
+
+        return self.async_show_form(step_id="init", data_schema=data_schema)
 

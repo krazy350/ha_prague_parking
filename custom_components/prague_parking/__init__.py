@@ -50,6 +50,8 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
     hass.data.setdefault(DOMAIN, {})
     hass.data[DOMAIN]["coordinators"] = []
+    # YAML option to enable API duration sensor
+    hass.data[DOMAIN]["show_api_duration"] = bool(conf.get("show_api_duration", False))
 
     # Support for multiple parkings
     parkings = conf.get("parkings", [])

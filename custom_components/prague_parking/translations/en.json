@@ -9,7 +9,8 @@
           "api_key": "API Key",
           "parking_id": "Parking ID",
           "name": "Parking Name (optional)",
-          "scan_interval": "Update interval (seconds)"
+          "scan_interval": "Update interval (seconds)",
+          "show_api_duration": "Show API request duration sensor (optional)"
         }
       }
     },
@@ -21,6 +22,17 @@
     },
     "abort": {
       "already_configured": "This parking location is already configured"
+    }
+  }
+
+  ,"options":{
+    "step":{
+      "init":{
+        "title":"Options",
+        "data":{
+          "show_api_duration":"Show API request duration sensor"
+        }
+      }
     }
   }
 }
