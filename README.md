@@ -10,6 +10,18 @@ This custom integration provides real-time parking information for Prague parkin
 
 ## Installation
 
+### Option 1: HACS (Recommended — add as Custom Repository)
+
+1. Open **HACS** in Home Assistant
+2. Click the menu (⋮) in the top-right and choose **Custom repositories**
+3. Paste the repository URL: https://github.com/krazy350/ha_prague_parking
+4. Select **Category: Integration** and click **Add**
+5. Restart Home Assistant (the integration may not appear until HA restarts)
+6. Back in **Integrations**, click the **+** button, search for "Prague Parking", and click **Install**
+7. Configure the integration (see [Configuration](#configuration) section below)
+
+### Option 2: Manual Installation
+
 1. Copy the `prague_parking` folder to your Home Assistant `custom_components` directory
 2. Restart Home Assistant
 3. Configure the integration either via UI or YAML
