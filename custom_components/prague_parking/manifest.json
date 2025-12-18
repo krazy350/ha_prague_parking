@@ -1,0 +1,13 @@
+{
+  "domain": "prague_parking",
+  "name": "Prague Parking",
+  "codeowners": ["@krazy350"],
+  "config_flow": true,
+  "documentation": "https://github.com/krazy350/ha_prague_parking/README.md",
+  "issue_tracker": "https://github.com/krazy350/ha_prague_parking/issues",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "version": "1.1.0"
+}
+

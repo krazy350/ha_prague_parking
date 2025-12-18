@@ -1,0 +1,39 @@
+{
+  "title": "Prague Parking",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure Prague Parking",
+        "description": "Enter your Golemio API credentials and parking location ID",
+        "data": {
+          "api_key": "API Key",
+          "parking_id": "Parking ID",
+          "name": "Parking Name (optional)",
+          "scan_interval": "Update interval (seconds)",
+          "show_api_duration": "Show API request duration sensor (optional)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to Golemio API",
+      "invalid_auth": "Invalid API key",
+      "invalid_parking_id": "Invalid parking ID - no data found",
+      "unknown": "Unexpected error occurred"
+    },
+    "abort": {
+      "already_configured": "This parking location is already configured"
+    }
+  }
+
+  ,"options":{
+    "step":{
+      "init":{
+        "title":"Options",
+        "data":{
+          "show_api_duration":"Show API request duration sensor"
+        }
+      }
+    }
+  }
+}
+
