@@ -52,15 +52,18 @@ class PragueParkingCoordinator(DataUpdateCoordinator):
 
                 start = time.perf_counter()
                 async with session.get(
-                    API_BASE_URL, headers=headers, params=params
+                    API_BASE_URL, headers=headers, params=params, timeout=10
                 ) as response:
+                    duration_ms = int((time.perf_counter() - start) * 1000)
                     if response.status != 200:
-                        raise UpdateFailed(
-                            f"Error fetching data: {response.status}"
+                        _LOGGER.error(
+                            "Error fetching data: %s (request duration: %sms)",
+                            response.status,
+                            duration_ms,
                         )
+                        raise UpdateFailed(f"Error fetching data: {response.status}")
 
                     data = await response.json()
-                    duration_ms = int((time.perf_counter() - start) * 1000)
 
                     # API returns a list of measurements
                     if not isinstance(data, list) or len(data) == 0:
