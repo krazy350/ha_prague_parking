@@ -1,5 +1,6 @@
 """DataUpdateCoordinator for Prague Parking."""
 import logging
+import time
 from datetime import timedelta
 from typing import Any
 
@@ -49,6 +50,7 @@ class PragueParkingCoordinator(DataUpdateCoordinator):
                     "offset": 0,
                 }
 
+                start = time.perf_counter()
                 async with session.get(
                     API_BASE_URL, headers=headers, params=params
                 ) as response:
@@ -58,6 +60,7 @@ class PragueParkingCoordinator(DataUpdateCoordinator):
                         )
 
                     data = await response.json()
+                    duration_ms = int((time.perf_counter() - start) * 1000)
 
                     # API returns a list of measurements
                     if not isinstance(data, list) or len(data) == 0:
@@ -97,6 +100,7 @@ class PragueParkingCoordinator(DataUpdateCoordinator):
                         "name": display_name,
                         "address": parking_data.get("address", ""),
                         "last_updated": parking_data.get("last_updated"),
+                        "api_request_duration_ms": duration_ms,
                     }
 
         except aiohttp.ClientError as err:

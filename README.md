@@ -28,6 +28,13 @@ You can configure this integration in two ways:
 6. Optionally adjust the scan interval (default: 60 seconds)
 7. Repeat steps 2-6 to add multiple parking locations
 
+To enable the optional API request duration sensor after installation:
+
+1. Go to **Settings** → **Devices & Services** → **Integrations**
+2. Locate your **Prague Parking** integration entry and click it
+3. Click **Options**
+4. Toggle **Show API request duration sensor** and click **Save**
+
 ### Option 2: YAML Configuration
 
 Add the following to your `configuration.yaml`:
@@ -64,6 +71,7 @@ prague_parking:
 - **parkings** (Optional): List of parking locations
   - **parking_id** (Required): The parking location ID
   - **name** (Optional): Custom name for the parking location
+ - **show_api_duration** (Optional): Set to `true` to enable an optional sensor that reports the API request duration in milliseconds. Can be set during UI setup (Options) or in YAML.
 
 ### Example Configuration
 
@@ -73,6 +81,7 @@ prague_parking:
 prague_parking:
   api_key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDAyMCwiaWF0IjoxNzYwNDI1MzMwLCJleHAiOjExNzYwNDI1MzMwLCJpc3MiOiJnb2xlbWlvIiwianRpIjoiODRhN2E1ZGYtMTcxMC00OTYyLWE1M2YtMTAxOTYyNWM1M2YzIn0.XW6gwaDkf2yFYZjQjYRvaN8MkM_dPgfaWvBTizKAlhk
   parking_id: tsk-offstreet-6b737fe9-6f24-450c-9868-819cb9377ad8
+  show_api_duration: true
 ```
 
 #### Multiple Parkings
@@ -81,6 +90,7 @@ prague_parking:
 prague_parking:
   api_key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDAyMCwiaWF0IjoxNzYwNDI1MzMwLCJleHAiOjExNzYwNDI1MzMwLCJpc3MiOiJnb2xlbWlvIiwianRpIjoiODRhN2E1ZGYtMTcxMC00OTYyLWE1M2YtMTAxOTYyNWM1M2YzIn0.XW6gwaDkf2yFYZjQjYRvaN8MkM_dPgfaWvBTizKAlhk
   scan_interval: 60
+  show_api_duration: true
   parkings:
     - parking_id: tsk-offstreet-6b737fe9-6f24-450c-9868-819cb9377ad8
       name: "Parking Anděl"
@@ -103,6 +113,10 @@ The integration creates three sensors **for each parking location**:
 3. **{Parking Name} Occupancy** (e.g., `sensor.city_center_parking_occupancy_percentage`)
    - Shows the occupancy percentage
    - Unit: %
+
+4. **{Parking Name} API Request Duration** (e.g., `sensor.city_center_parking_api_request_duration_ms`) - *optional*
+  - Shows the duration of the last API request to Golemio in milliseconds
+  - Unit: ms
 
 **Note:** The parking name in the sensor entity is based on:
 - The custom `name` you provide in the configuration, or
